@@ -1,13 +1,20 @@
 {{toc}}
+# comment check... failed... succeeded, put require at init.el
 
-!’³µ’Í×
-emacs hiki mode
+!æ¦‚è¦
+emacs hiki mode 
 
-!’»²’¹Í’»ñ’ÎÁ
-*[[http://ergoemacs.org/emacs/elisp_syntax_coloring.html]],’¤Û’¤È’¤ó’¤É’¤³’¤ì’¤Ç’¤Ç’¤­’¤½’¤¦’¡¥
+!å‚è€ƒè³‡æ–™
+*[[http://ergoemacs.org/emacs/elisp_syntax_coloring.html]], ã»ã¨ã‚“ã©ã“ã‚Œã§ã§ããã†ï¼
+*[[https://www.emacswiki.org/emacs/SampleMode]],samplemodeãŒè¼‰ã£ã¦ã„ã¾ã™ï¼å‹•ãã¾ã›ã‚“ï¼(hiki-mode_1.el)
+*[[http://jblevins.org/projects/markdown-mode/]],markdown-modeã‚’å‚ç…§ã—ã¦ä½œã£ã¦ã¿ã¾ã™ï¼ãœã‚“ãœã‚“ã ã‚ï¼
+*[[https://www.emacswiki.org/emacs/DerivedMode]],derived-modeã‚’å‚ç…§ã—ã¦ä½œã£ã¦ã¿ã¾ã™ï¼(hiki-mode.el)
+** ãŠï¼å‹•ã„ãŸï¼
 
-!’½é’´ü’Àß’Äê
-’°Ê’²¼’¤Ëhiki-mode’¤Î’¤Ò’¤Ê’·Á’¤ò’¼¨’¤¹’¡¥
+{{attach_anchor(test.pdf)}}
+
+!åˆæœŸè¨­å®š
+ä»¥ä¸‹ã«hiki-modeã®ã²ãªå½¢ã‚’ç¤ºã™ï¼
 <<< lisp
 bob% cat lib/hiki-mode.el 
 (defun hiki-mode ()
@@ -21,8 +28,8 @@ bob% cat lib/hiki-mode.el
  
 (provide 'hiki-mode)
 >>>
-’°Ê’¾å’¤Î’¥Õ’¥¡’¥¤’¥ë’¤òlib/hiki-mode.el’¤È’¤·’¤Æ’ÍÑ’°Õ’¤·’¤Æ’¤ª’¤¯’¡¥
-’¼¡’¤ÎRakefile’¤Ë’¤·’¤¿’¤¬’¤Ã’¤Æ’¡¤'rake hiki'’¤Ë’¤è’¤Ã’¤Æemacs’¤¬hiki-mode’¤òautoload’¤·’¤Æ’¤¯’¤ì’¤ë’¡¥
+ä»¥ä¸Šã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚’lib/hiki-mode.elã¨ã—ã¦ç”¨æ„ã—ã¦ãŠãï¼
+æ¬¡ã®Rakefileã«ã—ãŸãŒã£ã¦ï¼Œ'rake hiki'ã«ã‚ˆã£ã¦emacsãŒhiki-modeã‚’autoloadã—ã¦ãã‚Œã‚‹ï¼
 <<< ruby
 desc "install hiki-mode in emacs"
 task :hiki do

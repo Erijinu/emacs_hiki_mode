@@ -1,39 +1,52 @@
-;;; font-lock-modeを有効に
-(global-font-lock-mode t)
+(defvar hiki-constants
+  '("reservedword1"
+    "reservedword2"))
 
-;; コメント
-(set-face-foreground 'font-lock-comment-face "#008000")
+(defvar hiki-keywords
+  '("toc" "attach_anchor"))
 
-;; 文字列
-(set-face-foreground 'font-lock-string-face "#A31515")
+;; I'd probably put in a default that you want, as opposed to nil
+(defvar hiki-tab-width 2 "Width of a tab for HIKI mode")
 
-;; キーワード(Cのforやifのように構文的に重要な名前に使われる)
-(set-face-foreground 'font-lock-keyword-face "#1518FF")
+;; Two small edits.
+;; First is to put an extra set of parens () around the list
+;; which is the format that font-lock-defaults wants
+;; Second, you used ' (quote) at the outermost level where you wanted ` (backquote)
+;; you were very close
+(defvar hiki-font-lock-defaults
+  `((
+     ;; stuff between double quotes
+;;     ("\"\\.\\*\\?" . font-lock-string-face) ;; doesn't work
+     ;; ; : , ; { } =>  @ $ = are all special elements
+     (":\\|,\\|;\\|{\\|}\\|=>\\|@\\|$\\|=" . font-lock-keyword-face)
+     ( ,(regexp-opt hiki-keywords 'words) . font-lock-builtin-face)
+     ( ,(regexp-opt hiki-constants 'words) . font-lock-constant-face)
+     )))
 
-(defvar hiki-mode-syntax-table nil "Syntax table for `hiki-mode'.")
+(define-derived-mode hiki-mode fundamental-mode "HIKI script"
+  "HIKI mode is a major mode for editing HIKI files"
+  ;; you again used quote when you had '((hiki-hilite))
+  ;; I just updated the variable to have the proper nesting (as noted above)
+  ;; and use the value directly here
+  (setq font-lock-defaults hiki-font-lock-defaults)
 
-(setq hiki-mode-syntax-table
-      (let ( (synTable (make-syntax-table)))
-        ;; pre-formatted style comment “<<< … >>>”
-        (modify-syntax-entry ?< ". 123" synTable)
-        (modify-syntax-entry ?> ". 456" synTable)
-        synTable))
+  ;; when there's an override, use it
+  ;; otherwise it gets the default value
+  (when hiki-tab-width
+    (setq tab-width hiki-tab-width))
 
-(define-derived-mode hiki-mode prog-mode "hiki"
-  "hiki-mode is a major mode for editing language hiki."
-  (setq font-lock-defaults (list nil)))
+  ;; for comments
+  ;; overriding these vars gets you what (I think) you want
+  ;; they're made buffer local when you set them
+;;  (setq comment-start "#") ;; doesn't work
+;;  (setq comment-end "") ;; doesn't work
 
-(defun hiki-mode ()
-  "Hiki Mode "
-  (interactive)
-  (kill-all-local-variables)
-  (setq mode-name "Hiki")
-  (setq major-mode 'hiki-mode)
- 
-  (run-hooks 'hiki-mode-hook))
- 
+  (modify-syntax-entry ?# "< b" hiki-mode-syntax-table) ;;it works
+  (modify-syntax-entry ?\n "> b" hiki-mode-syntax-table) ;;it works
+
+  ;; Note that there's no need to manually call `hiki-mode-hook'; `define-derived-mode'
+  ;; will define `hiki-mode' to call it properly right before it exits
+  )
+
 (provide 'hiki-mode)
-
-(font-lock-add-keywords 'hiki-mode
-  '(("!$$" . font-lock-keyword-face)))
 

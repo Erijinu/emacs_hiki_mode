@@ -1,6 +1,14 @@
+1. comment check... failed... succeeded, put require at init.el
 
 # 概要
-emacs hiki mode
+emacs hiki mode 
+
+# 参考資料
+- ![](http://ergoemacs.org/emacs/elisp_syntax_coloring.html), ほとんどこれでできそう．だめや．
+- ![](https://www.emacswiki.org/emacs/SampleMode),samplemodeが載っています．動きません．(hiki-mode_1.el)
+- ![](http://jblevins.org/projects/markdown-mode/),markdown-modeを参照して作ってみます．ぜんぜんだめ．
+- ![](https://www.emacswiki.org/emacs/DerivedMode),derived-modeを参照して作ってみます．(hiki-mode.el)
+  - お．動いた．
 
 # 初期設定
 以下にhiki-modeのひな形を示す．
